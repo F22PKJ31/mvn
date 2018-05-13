@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sac.dao.SacSelectcourseMapper" >
+  <resultMap id="BaseResultMap" type="com.sac.pojo.SacSelectcourse" >
+    <id column="selectid" property="selectid" jdbcType="INTEGER" />
+    <result column="courseid" property="courseid" jdbcType="INTEGER" />
+    <result column="stuid" property="stuid" jdbcType="INTEGER" />
+    <result column="selecttime" property="selecttime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    selectid, courseid, stuid, selecttime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sac.pojo.SacSelectcourseExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sac_selectcourse
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sac_selectcourse
+    where selectid = #{selectid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sac_selectcourse
+    where selectid = #{selectid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sac.pojo.SacSelectcourseExample" >
+    delete from sac_selectcourse
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sac.pojo.SacSelectcourse" >
+    insert into sac_selectcourse (selectid, courseid, stuid, 
+      selecttime)
+    values (#{selectid,jdbcType=INTEGER}, #{courseid,jdbcType=INTEGER}, #{stuid,jdbcType=INTEGER}, 
+      #{selecttime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sac.pojo.SacSelectcourse" >
+    insert into sac_selectcourse
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="selectid != null" >
+        selectid,
+      </if>
+      <if test="courseid != null" >
+        courseid,
+      </if>
+      <if test="stuid != null" >
+        stuid,
+      </if>
+      <if test="selecttime != null" >
+        selecttime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="selectid != null" >
+        #{selectid,jdbcType=INTEGER},
+      </if>
+      <if test="courseid != null" >
+        #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="stuid != null" >
+        #{stuid,jdbcType=INTEGER},
+      </if>
+      <if test="selecttime != null" >
+        #{selecttime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sac.pojo.SacSelectcourseExample" resultType="java.lang.Integer" >
+    select count(*) from sac_selectcourse
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sac_selectcourse
+    <set >
+      <if test="record.selectid != null" >
+        selectid = #{record.selectid,jdbcType=INTEGER},
+      </if>
+      <if test="record.courseid != null" >
+        courseid = #{record.courseid,jdbcType=INTEGER},
+      </if>
+      <if test="record.stuid != null" >
+        stuid = #{record.stuid,jdbcType=INTEGER},
+      </if>
+      <if test="record.selecttime != null" >
+        selecttime = #{record.selecttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sac_selectcourse
+    set selectid = #{record.selectid,jdbcType=INTEGER},
+      courseid = #{record.courseid,jdbcType=INTEGER},
+      stuid = #{record.stuid,jdbcType=INTEGER},
+      selecttime = #{record.selecttime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sac.pojo.SacSelectcourse" >
+    update sac_selectcourse
+    <set >
+      <if test="courseid != null" >
+        courseid = #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="stuid != null" >
+        stuid = #{stuid,jdbcType=INTEGER},
+      </if>
+      <if test="selecttime != null" >
+        selecttime = #{selecttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where selectid = #{selectid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sac.pojo.SacSelectcourse" >
+    update sac_selectcourse
+    set courseid = #{courseid,jdbcType=INTEGER},
+      stuid = #{stuid,jdbcType=INTEGER},
+      selecttime = #{selecttime,jdbcType=TIMESTAMP}
+    where selectid = #{selectid,jdbcType=INTEGER}
+  </update>
+</mapper>

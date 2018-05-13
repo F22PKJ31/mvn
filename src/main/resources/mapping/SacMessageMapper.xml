@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sac.dao.SacMessageMapper" >
+  <resultMap id="BaseResultMap" type="com.sac.pojo.SacMessage" >
+    <id column="messageid" property="messageid" jdbcType="INTEGER" />
+    <result column="messagetitle" property="messagetitle" jdbcType="VARCHAR" />
+    <result column="messagecontent" property="messagecontent" jdbcType="VARCHAR" />
+    <result column="messagedate" property="messagedate" jdbcType="TIMESTAMP" />
+    <result column="messagedesc" property="messagedesc" jdbcType="VARCHAR" />
+    <result column="messagecompany" property="messagecompany" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    messageid, messagetitle, messagecontent, messagedate, messagedesc, messagecompany
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sac.pojo.SacMessageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sac_message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sac_message
+    where messageid = #{messageid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sac_message
+    where messageid = #{messageid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sac.pojo.SacMessageExample" >
+    delete from sac_message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sac.pojo.SacMessage" >
+    insert into sac_message (messageid, messagetitle, messagecontent, 
+      messagedate, messagedesc, messagecompany
+      )
+    values (#{messageid,jdbcType=INTEGER}, #{messagetitle,jdbcType=VARCHAR}, #{messagecontent,jdbcType=VARCHAR}, 
+      #{messagedate,jdbcType=TIMESTAMP}, #{messagedesc,jdbcType=VARCHAR}, #{messagecompany,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sac.pojo.SacMessage" >
+    insert into sac_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="messageid != null" >
+        messageid,
+      </if>
+      <if test="messagetitle != null" >
+        messagetitle,
+      </if>
+      <if test="messagecontent != null" >
+        messagecontent,
+      </if>
+      <if test="messagedate != null" >
+        messagedate,
+      </if>
+      <if test="messagedesc != null" >
+        messagedesc,
+      </if>
+      <if test="messagecompany != null" >
+        messagecompany,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="messageid != null" >
+        #{messageid,jdbcType=INTEGER},
+      </if>
+      <if test="messagetitle != null" >
+        #{messagetitle,jdbcType=VARCHAR},
+      </if>
+      <if test="messagecontent != null" >
+        #{messagecontent,jdbcType=VARCHAR},
+      </if>
+      <if test="messagedate != null" >
+        #{messagedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="messagedesc != null" >
+        #{messagedesc,jdbcType=VARCHAR},
+      </if>
+      <if test="messagecompany != null" >
+        #{messagecompany,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sac.pojo.SacMessageExample" resultType="java.lang.Integer" >
+    select count(*) from sac_message
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sac_message
+    <set >
+      <if test="record.messageid != null" >
+        messageid = #{record.messageid,jdbcType=INTEGER},
+      </if>
+      <if test="record.messagetitle != null" >
+        messagetitle = #{record.messagetitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.messagecontent != null" >
+        messagecontent = #{record.messagecontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.messagedate != null" >
+        messagedate = #{record.messagedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.messagedesc != null" >
+        messagedesc = #{record.messagedesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.messagecompany != null" >
+        messagecompany = #{record.messagecompany,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sac_message
+    set messageid = #{record.messageid,jdbcType=INTEGER},
+      messagetitle = #{record.messagetitle,jdbcType=VARCHAR},
+      messagecontent = #{record.messagecontent,jdbcType=VARCHAR},
+      messagedate = #{record.messagedate,jdbcType=TIMESTAMP},
+      messagedesc = #{record.messagedesc,jdbcType=VARCHAR},
+      messagecompany = #{record.messagecompany,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sac.pojo.SacMessage" >
+    update sac_message
+    <set >
+      <if test="messagetitle != null" >
+        messagetitle = #{messagetitle,jdbcType=VARCHAR},
+      </if>
+      <if test="messagecontent != null" >
+        messagecontent = #{messagecontent,jdbcType=VARCHAR},
+      </if>
+      <if test="messagedate != null" >
+        messagedate = #{messagedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="messagedesc != null" >
+        messagedesc = #{messagedesc,jdbcType=VARCHAR},
+      </if>
+      <if test="messagecompany != null" >
+        messagecompany = #{messagecompany,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where messageid = #{messageid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sac.pojo.SacMessage" >
+    update sac_message
+    set messagetitle = #{messagetitle,jdbcType=VARCHAR},
+      messagecontent = #{messagecontent,jdbcType=VARCHAR},
+      messagedate = #{messagedate,jdbcType=TIMESTAMP},
+      messagedesc = #{messagedesc,jdbcType=VARCHAR},
+      messagecompany = #{messagecompany,jdbcType=VARCHAR}
+    where messageid = #{messageid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sac.dao.SacCommentMapper" >
+  <resultMap id="BaseResultMap" type="com.sac.pojo.SacComment" >
+    <id column="commentid" property="commentid" jdbcType="INTEGER" />
+    <result column="commentcontent" property="commentcontent" jdbcType="VARCHAR" />
+    <result column="postid" property="postid" jdbcType="INTEGER" />
+    <result column="studentname" property="studentname" jdbcType="VARCHAR" />
+    <result column="commentdate" property="commentdate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    commentid, commentcontent, postid, studentname, commentdate
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sac.pojo.SacCommentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sac_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sac_comment
+    where commentid = #{commentid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sac_comment
+    where commentid = #{commentid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sac.pojo.SacCommentExample" >
+    delete from sac_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sac.pojo.SacComment" >
+    insert into sac_comment (commentid, commentcontent, postid, 
+      studentname, commentdate)
+    values (#{commentid,jdbcType=INTEGER}, #{commentcontent,jdbcType=VARCHAR}, #{postid,jdbcType=INTEGER}, 
+      #{studentname,jdbcType=VARCHAR}, #{commentdate,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sac.pojo.SacComment" >
+    insert into sac_comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="commentid != null" >
+        commentid,
+      </if>
+      <if test="commentcontent != null" >
+        commentcontent,
+      </if>
+      <if test="postid != null" >
+        postid,
+      </if>
+      <if test="studentname != null" >
+        studentname,
+      </if>
+      <if test="commentdate != null" >
+        commentdate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="commentid != null" >
+        #{commentid,jdbcType=INTEGER},
+      </if>
+      <if test="commentcontent != null" >
+        #{commentcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="postid != null" >
+        #{postid,jdbcType=INTEGER},
+      </if>
+      <if test="studentname != null" >
+        #{studentname,jdbcType=VARCHAR},
+      </if>
+      <if test="commentdate != null" >
+        #{commentdate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sac.pojo.SacCommentExample" resultType="java.lang.Integer" >
+    select count(*) from sac_comment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sac_comment
+    <set >
+      <if test="record.commentid != null" >
+        commentid = #{record.commentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.commentcontent != null" >
+        commentcontent = #{record.commentcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postid != null" >
+        postid = #{record.postid,jdbcType=INTEGER},
+      </if>
+      <if test="record.studentname != null" >
+        studentname = #{record.studentname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.commentdate != null" >
+        commentdate = #{record.commentdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sac_comment
+    set commentid = #{record.commentid,jdbcType=INTEGER},
+      commentcontent = #{record.commentcontent,jdbcType=VARCHAR},
+      postid = #{record.postid,jdbcType=INTEGER},
+      studentname = #{record.studentname,jdbcType=VARCHAR},
+      commentdate = #{record.commentdate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sac.pojo.SacComment" >
+    update sac_comment
+    <set >
+      <if test="commentcontent != null" >
+        commentcontent = #{commentcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="postid != null" >
+        postid = #{postid,jdbcType=INTEGER},
+      </if>
+      <if test="studentname != null" >
+        studentname = #{studentname,jdbcType=VARCHAR},
+      </if>
+      <if test="commentdate != null" >
+        commentdate = #{commentdate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where commentid = #{commentid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sac.pojo.SacComment" >
+    update sac_comment
+    set commentcontent = #{commentcontent,jdbcType=VARCHAR},
+      postid = #{postid,jdbcType=INTEGER},
+      studentname = #{studentname,jdbcType=VARCHAR},
+      commentdate = #{commentdate,jdbcType=TIMESTAMP}
+    where commentid = #{commentid,jdbcType=INTEGER}
+  </update>
+</mapper>

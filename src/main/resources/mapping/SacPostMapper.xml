@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sac.dao.SacPostMapper" >
+  <resultMap id="BaseResultMap" type="com.sac.pojo.SacPost" >
+    <id column="postid" property="postid" jdbcType="INTEGER" />
+    <result column="posttitle" property="posttitle" jdbcType="VARCHAR" />
+    <result column="postcontent" property="postcontent" jdbcType="VARCHAR" />
+    <result column="postername" property="postername" jdbcType="VARCHAR" />
+    <result column="postdate" property="postdate" jdbcType="TIMESTAMP" />
+    <result column="postdesc" property="postdesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    postid, posttitle, postcontent, postername, postdate, postdesc
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sac.pojo.SacPostExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sac_post
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sac_post
+    where postid = #{postid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sac_post
+    where postid = #{postid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sac.pojo.SacPostExample" >
+    delete from sac_post
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sac.pojo.SacPost" >
+    insert into sac_post (postid, posttitle, postcontent, 
+      postername, postdate, postdesc
+      )
+    values (#{postid,jdbcType=INTEGER}, #{posttitle,jdbcType=VARCHAR}, #{postcontent,jdbcType=VARCHAR}, 
+      #{postername,jdbcType=VARCHAR}, #{postdate,jdbcType=TIMESTAMP}, #{postdesc,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sac.pojo.SacPost" >
+    insert into sac_post
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="postid != null" >
+        postid,
+      </if>
+      <if test="posttitle != null" >
+        posttitle,
+      </if>
+      <if test="postcontent != null" >
+        postcontent,
+      </if>
+      <if test="postername != null" >
+        postername,
+      </if>
+      <if test="postdate != null" >
+        postdate,
+      </if>
+      <if test="postdesc != null" >
+        postdesc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="postid != null" >
+        #{postid,jdbcType=INTEGER},
+      </if>
+      <if test="posttitle != null" >
+        #{posttitle,jdbcType=VARCHAR},
+      </if>
+      <if test="postcontent != null" >
+        #{postcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="postername != null" >
+        #{postername,jdbcType=VARCHAR},
+      </if>
+      <if test="postdate != null" >
+        #{postdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="postdesc != null" >
+        #{postdesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sac.pojo.SacPostExample" resultType="java.lang.Integer" >
+    select count(*) from sac_post
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sac_post
+    <set >
+      <if test="record.postid != null" >
+        postid = #{record.postid,jdbcType=INTEGER},
+      </if>
+      <if test="record.posttitle != null" >
+        posttitle = #{record.posttitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postcontent != null" >
+        postcontent = #{record.postcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postername != null" >
+        postername = #{record.postername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postdate != null" >
+        postdate = #{record.postdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.postdesc != null" >
+        postdesc = #{record.postdesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sac_post
+    set postid = #{record.postid,jdbcType=INTEGER},
+      posttitle = #{record.posttitle,jdbcType=VARCHAR},
+      postcontent = #{record.postcontent,jdbcType=VARCHAR},
+      postername = #{record.postername,jdbcType=VARCHAR},
+      postdate = #{record.postdate,jdbcType=TIMESTAMP},
+      postdesc = #{record.postdesc,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sac.pojo.SacPost" >
+    update sac_post
+    <set >
+      <if test="posttitle != null" >
+        posttitle = #{posttitle,jdbcType=VARCHAR},
+      </if>
+      <if test="postcontent != null" >
+        postcontent = #{postcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="postername != null" >
+        postername = #{postername,jdbcType=VARCHAR},
+      </if>
+      <if test="postdate != null" >
+        postdate = #{postdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="postdesc != null" >
+        postdesc = #{postdesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where postid = #{postid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sac.pojo.SacPost" >
+    update sac_post
+    set posttitle = #{posttitle,jdbcType=VARCHAR},
+      postcontent = #{postcontent,jdbcType=VARCHAR},
+      postername = #{postername,jdbcType=VARCHAR},
+      postdate = #{postdate,jdbcType=TIMESTAMP},
+      postdesc = #{postdesc,jdbcType=VARCHAR}
+    where postid = #{postid,jdbcType=INTEGER}
+  </update>
+</mapper>

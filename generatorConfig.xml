@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE generatorConfiguration  
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"  
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<!-- 数据库驱动 -->
+	<!-- <classPathEntry location="mysql-connector-java-5.1.25-bin.jar"/> -->
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<commentGenerator>
+			<property name="suppressDate" value="false" />
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<!--数据库链接URL，用户名、密码 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://127.0.0.1:3306/studentandcompany" userId="root"
+			password="root">
+		</jdbcConnection>
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		<!-- 生成模型的包名和位置 -->
+		<javaModelGenerator targetPackage="com.sac.pojo"
+			targetProject=".\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<!-- 生成映射文件的包名和位置 -->
+		<sqlMapGenerator targetPackage="com.sac.mapping"
+			targetProject=".\src\main\java">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		<!-- 生成DAO的包名和位置 -->
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.sac.dao" targetProject=".\src\main\java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+		<!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名 -->
+
+
+
+		<table tableName="sac_student" domainObjectName="SacStudent"></table>
+		<table tableName="sac_teacher" domainObjectName="SacTeacher"></table>
+		<table tableName="sac_course" domainObjectName="SacCourse"></table>
+		<table tableName="sac_post" domainObjectName="SacPost"></table>
+		<table tableName="sac_comment" domainObjectName="SacComment"></table>
+		<table tableName="sac_selectcourse" domainObjectName="SacSelectcourse"></table>
+		<table tableName="sac_lesson" domainObjectName="SacLesson"></table>
+		<table tableName="sac_admin" domainObjectName="SacAdmin"></table>
+		<table tableName="sac_school" domainObjectName="SacSchool"></table>
+		<table tableName="sac_company" domainObjectName="SacCompany"></table>
+		<table tableName="sac_cooperation" domainObjectName="SacCooperation"></table>
+		<table tableName="sac_message" domainObjectName="SacMessage"></table>
+	</context>
+</generatorConfiguration>  

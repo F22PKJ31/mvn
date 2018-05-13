@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sac.dao.SacStudentMapper" >
+  <resultMap id="BaseResultMap" type="com.sac.pojo.SacStudent" >
+    <id column="stuid" property="stuid" jdbcType="INTEGER" />
+    <result column="stupsw" property="stupsw" jdbcType="VARCHAR" />
+    <result column="stunickname" property="stunickname" jdbcType="VARCHAR" />
+    <result column="stuschool" property="stuschool" jdbcType="VARCHAR" />
+    <result column="stuphone" property="stuphone" jdbcType="BIGINT" />
+    <result column="stumail" property="stumail" jdbcType="VARCHAR" />
+    <result column="stuheadpic" property="stuheadpic" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    stuid, stupsw, stunickname, stuschool, stuphone, stumail, stuheadpic
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sac.pojo.SacStudentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sac_student
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sac_student
+    where stuid = #{stuid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sac_student
+    where stuid = #{stuid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sac.pojo.SacStudentExample" >
+    delete from sac_student
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sac.pojo.SacStudent" >
+    insert into sac_student (stuid, stupsw, stunickname, 
+      stuschool, stuphone, stumail, 
+      stuheadpic)
+    values (#{stuid,jdbcType=INTEGER}, #{stupsw,jdbcType=VARCHAR}, #{stunickname,jdbcType=VARCHAR}, 
+      #{stuschool,jdbcType=VARCHAR}, #{stuphone,jdbcType=BIGINT}, #{stumail,jdbcType=VARCHAR}, 
+      #{stuheadpic,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sac.pojo.SacStudent" >
+    insert into sac_student
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stuid != null" >
+        stuid,
+      </if>
+      <if test="stupsw != null" >
+        stupsw,
+      </if>
+      <if test="stunickname != null" >
+        stunickname,
+      </if>
+      <if test="stuschool != null" >
+        stuschool,
+      </if>
+      <if test="stuphone != null" >
+        stuphone,
+      </if>
+      <if test="stumail != null" >
+        stumail,
+      </if>
+      <if test="stuheadpic != null" >
+        stuheadpic,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stuid != null" >
+        #{stuid,jdbcType=INTEGER},
+      </if>
+      <if test="stupsw != null" >
+        #{stupsw,jdbcType=VARCHAR},
+      </if>
+      <if test="stunickname != null" >
+        #{stunickname,jdbcType=VARCHAR},
+      </if>
+      <if test="stuschool != null" >
+        #{stuschool,jdbcType=VARCHAR},
+      </if>
+      <if test="stuphone != null" >
+        #{stuphone,jdbcType=BIGINT},
+      </if>
+      <if test="stumail != null" >
+        #{stumail,jdbcType=VARCHAR},
+      </if>
+      <if test="stuheadpic != null" >
+        #{stuheadpic,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sac.pojo.SacStudentExample" resultType="java.lang.Integer" >
+    select count(*) from sac_student
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sac_student
+    <set >
+      <if test="record.stuid != null" >
+        stuid = #{record.stuid,jdbcType=INTEGER},
+      </if>
+      <if test="record.stupsw != null" >
+        stupsw = #{record.stupsw,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stunickname != null" >
+        stunickname = #{record.stunickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stuschool != null" >
+        stuschool = #{record.stuschool,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stuphone != null" >
+        stuphone = #{record.stuphone,jdbcType=BIGINT},
+      </if>
+      <if test="record.stumail != null" >
+        stumail = #{record.stumail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stuheadpic != null" >
+        stuheadpic = #{record.stuheadpic,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sac_student
+    set stuid = #{record.stuid,jdbcType=INTEGER},
+      stupsw = #{record.stupsw,jdbcType=VARCHAR},
+      stunickname = #{record.stunickname,jdbcType=VARCHAR},
+      stuschool = #{record.stuschool,jdbcType=VARCHAR},
+      stuphone = #{record.stuphone,jdbcType=BIGINT},
+      stumail = #{record.stumail,jdbcType=VARCHAR},
+      stuheadpic = #{record.stuheadpic,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sac.pojo.SacStudent" >
+    update sac_student
+    <set >
+      <if test="stupsw != null" >
+        stupsw = #{stupsw,jdbcType=VARCHAR},
+      </if>
+      <if test="stunickname != null" >
+        stunickname = #{stunickname,jdbcType=VARCHAR},
+      </if>
+      <if test="stuschool != null" >
+        stuschool = #{stuschool,jdbcType=VARCHAR},
+      </if>
+      <if test="stuphone != null" >
+        stuphone = #{stuphone,jdbcType=BIGINT},
+      </if>
+      <if test="stumail != null" >
+        stumail = #{stumail,jdbcType=VARCHAR},
+      </if>
+      <if test="stuheadpic != null" >
+        stuheadpic = #{stuheadpic,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where stuid = #{stuid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sac.pojo.SacStudent" >
+    update sac_student
+    set stupsw = #{stupsw,jdbcType=VARCHAR},
+      stunickname = #{stunickname,jdbcType=VARCHAR},
+      stuschool = #{stuschool,jdbcType=VARCHAR},
+      stuphone = #{stuphone,jdbcType=BIGINT},
+      stumail = #{stumail,jdbcType=VARCHAR},
+      stuheadpic = #{stuheadpic,jdbcType=VARCHAR}
+    where stuid = #{stuid,jdbcType=INTEGER}
+  </update>
+</mapper>
