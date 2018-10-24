@@ -6,10 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -70,11 +68,11 @@ public class AdminController extends BaseController {
 		if (!file.isEmpty()) {
 			try {
 				if (!file2.isEmpty()) {
-					String filePath2 = UploadFile.URL + "img/course/" + file2.getOriginalFilename();
+					String filePath2 = UploadFile.PATH + "img/course/" + file2.getOriginalFilename();
 					file2.transferTo(new File(filePath2));
 					sacCourse.setHomepic("img/course/" + file2.getOriginalFilename());
 				}
-				String filePath = UploadFile.URL + "img/course/" + file.getOriginalFilename();
+				String filePath = UploadFile.PATH + "img/course/" + file.getOriginalFilename();
 
 				file.transferTo(new File(filePath));
 				sacCourse.setCoursepic("img/course/" + file.getOriginalFilename());
@@ -104,10 +102,10 @@ public class AdminController extends BaseController {
 		if (!file.isEmpty()) {
 			try {
 
-				String filePath = UploadFile.URL + "video/" + file.getOriginalFilename();
+				String filePath = UploadFile.PATH + "video/" + file.getOriginalFilename();
 
 				file.transferTo(new File(filePath));
-				sacLesson.setLessonsrc("video/" + file.getOriginalFilename());
+				sacLesson.setLessonsrc(UploadFile.URL +"video/" + file.getOriginalFilename());
 				boolean flag = adminService.addLesson(sacLesson);
 				if (flag) {
 					return new ModelAndView("redirect:showCourseView.do", model);
@@ -132,10 +130,10 @@ public class AdminController extends BaseController {
 		if (!file.isEmpty()) {
 			try {
 
-				String filePath = UploadFile.URL + "img/student/" + file.getOriginalFilename();
+				String filePath = UploadFile.PATH + "img/student/" + file.getOriginalFilename();
 
 				file.transferTo(new File(filePath));
-				sacStudent.setStuheadpic("img/student/" + file.getOriginalFilename());
+				sacStudent.setStuheadpic(UploadFile.URL +"img/student/" + file.getOriginalFilename());
 				int flag = homeService.addStudent(sacStudent);
 				if (flag == 1) {
 					return new ModelAndView("redirect:showStudentList.do");
@@ -246,16 +244,16 @@ public class AdminController extends BaseController {
 		System.out.println("123" + ishomepic);
 		try {
 			if (!file.isEmpty()) {
-				String filePath = UploadFile.URL + "img/course/" + file.getOriginalFilename();
+				String filePath = UploadFile.PATH + "img/course/" + file.getOriginalFilename();
 				file.transferTo(new File(filePath));
-				sacCourse.setCoursepic("img/course/" + file.getOriginalFilename());
+				sacCourse.setCoursepic(UploadFile.URL +"img/course/" + file.getOriginalFilename());
 			}
 			if (ishomepic == 0) {
 				sacCourse.setHomepic("没有主页图片");
 			} else if (!file2.isEmpty()) {
-				String filePath2 = UploadFile.URL + "img/course/" + file2.getOriginalFilename();
+				String filePath2 = UploadFile.PATH + "img/course/" + file2.getOriginalFilename();
 				file2.transferTo(new File(filePath2));
-				sacCourse.setHomepic("img/course/" + file2.getOriginalFilename());
+				sacCourse.setHomepic(UploadFile.URL +"img/course/" + file2.getOriginalFilename());
 			}
 		} catch (Exception e) {
 			model.put("msg", "失败");
@@ -275,9 +273,9 @@ public class AdminController extends BaseController {
 		Map<String, Object> model = new HashMap<>();
 		if (!file.isEmpty()) {
 			try {
-				String filePath = UploadFile.URL + "video/" + file.getOriginalFilename();
+				String filePath = UploadFile.PATH + "video/" + file.getOriginalFilename();
 				file.transferTo(new File(filePath));
-				sacLesson.setLessonsrc("video/" + file.getOriginalFilename());
+				sacLesson.setLessonsrc(UploadFile.URL +"video/" + file.getOriginalFilename());
 			} catch (Exception e) {
 				model.put("msg", "失败");
 				return new ModelAndView("redirect:showLessonUpdate.do?lessonid=" + sacLesson.getLessonid(), model);
@@ -298,10 +296,10 @@ public class AdminController extends BaseController {
 		if (!file.isEmpty()) {
 			try {
 
-				String filePath = UploadFile.URL + "img/student/" + file.getOriginalFilename();
+				String filePath = UploadFile.PATH + "img/student/" + file.getOriginalFilename();
 
 				file.transferTo(new File(filePath));
-				sacStudent.setStuheadpic("img/student/" + file.getOriginalFilename());
+				sacStudent.setStuheadpic(UploadFile.URL +"img/student/" + file.getOriginalFilename());
 
 			} catch (Exception e) {
 				model.put("msg", "失败");
@@ -323,10 +321,10 @@ public class AdminController extends BaseController {
 		if (!file.isEmpty()) {
 			try {
 
-				String filePath = UploadFile.URL + "img/" + file.getOriginalFilename();
+				String filePath = UploadFile.PATH + "img/" + file.getOriginalFilename();
 
 				file.transferTo(new File(filePath));
-				sacTeacher.setTeacherpic("img/" + file.getOriginalFilename());
+				sacTeacher.setTeacherpic(UploadFile.URL +"img/" + file.getOriginalFilename());
 				boolean flag = adminService.addTeacher(sacTeacher);
 				if (flag) {
 					return new ModelAndView("redirect:showTeacherList.do");
@@ -381,9 +379,9 @@ public class AdminController extends BaseController {
 		Map<String, Object> model = new HashMap<>();
 		if (!file.isEmpty()) {
 			try {
-				String filePath = UploadFile.URL + "img/" + file.getOriginalFilename();
+				String filePath = UploadFile.PATH + "img/" + file.getOriginalFilename();
 				file.transferTo(new File(filePath));
-				sacTeacher.setTeacherpic("img/" + file.getOriginalFilename());
+				sacTeacher.setTeacherpic(UploadFile.URL +"img/" + file.getOriginalFilename());
 
 			} catch (Exception e) {
 				model.put("msg", "失败");

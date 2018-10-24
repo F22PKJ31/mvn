@@ -15,6 +15,8 @@ public class SacStudent {
 
     private String stuheadpic;
 
+    private String sessionid;
+
     public Integer getStuid() {
         return stuid;
     }
@@ -69,5 +71,13 @@ public class SacStudent {
 
     public void setStuheadpic(String stuheadpic) {
         this.stuheadpic = stuheadpic == null ? null : stuheadpic.trim();
+    }
+
+    public String getSessionid() {
+        return sessionid;
+    }
+
+    public void setSessionid(String sessionid) {
+        this.sessionid = sessionid == null ? null : sessionid.trim();
     }
 }

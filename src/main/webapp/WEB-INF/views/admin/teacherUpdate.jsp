@@ -32,7 +32,7 @@
                     <label for="teacherPic">教师图片：</label>
                     <input type="file" name="file" id="exampleInputFile" /><br>
                     <img style="margin-left: 200px;margin-top: 10px; width: 283px;"
-                     alt="" src="${pageContext.request.contextPath }/${teacher.getTeacherpic() }"> 
+                     alt="" src="${teacher.getTeacherpic() }">
                     <span>*</span>
 
                 </div>

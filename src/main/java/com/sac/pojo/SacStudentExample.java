@@ -573,6 +573,76 @@ public class SacStudentExample {
             addCriterion("stuheadpic not between", value1, value2, "stuheadpic");
             return (Criteria) this;
         }
+
+        public Criteria andSessionidIsNull() {
+            addCriterion("sessionid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionidIsNotNull() {
+            addCriterion("sessionid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionidEqualTo(String value) {
+            addCriterion("sessionid =", value, "sessionid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionidNotEqualTo(String value) {
+            addCriterion("sessionid <>", value, "sessionid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionidGreaterThan(String value) {
+            addCriterion("sessionid >", value, "sessionid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionidGreaterThanOrEqualTo(String value) {
+            addCriterion("sessionid >=", value, "sessionid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionidLessThan(String value) {
+            addCriterion("sessionid <", value, "sessionid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionidLessThanOrEqualTo(String value) {
+            addCriterion("sessionid <=", value, "sessionid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionidLike(String value) {
+            addCriterion("sessionid like", value, "sessionid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionidNotLike(String value) {
+            addCriterion("sessionid not like", value, "sessionid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionidIn(List<String> values) {
+            addCriterion("sessionid in", values, "sessionid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionidNotIn(List<String> values) {
+            addCriterion("sessionid not in", values, "sessionid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionidBetween(String value1, String value2) {
+            addCriterion("sessionid between", value1, value2, "sessionid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSessionidNotBetween(String value1, String value2) {
+            addCriterion("sessionid not between", value1, value2, "sessionid");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

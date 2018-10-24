@@ -36,13 +36,15 @@ public class HomeService extends BaseService {
 		}
 	}
 
-	public boolean login(SacStudent sacStudent) {
+	public boolean login(SacStudent sacStudent, String id) {
 		// TODO Auto-generated method stub
 		SacStudentExample example = new SacStudentExample();
 		example.createCriteria().andStunicknameEqualTo(sacStudent.getStunickname());
 		List<SacStudent> list = sacStudentMapper.selectByExample(example);
 		if (!list.isEmpty()) {
 			if (list.get(0).getStupsw().equals(sacStudent.getStupsw())) {
+				sacStudent.setSessionid(id);
+				sacStudentMapper.updateByPrimaryKeySelective(sacStudent);
 				return true;
 			} else {
 				return false;
@@ -147,4 +149,9 @@ public class HomeService extends BaseService {
 		return selectByExample;
 	}
 
+	public int clearSession(Integer stuid) {
+		SacStudent student = sacStudentMapper.selectByPrimaryKey(stuid);
+		student.setSessionid(null);
+		return sacStudentMapper.updateByPrimaryKey(student);
+	}
 }

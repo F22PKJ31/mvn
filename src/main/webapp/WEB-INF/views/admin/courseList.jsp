@@ -59,8 +59,8 @@
 	                    <td>${v.coursemajor }</td>
 	                    <td>${v.coursedesc }</td>
 	                    <td>${v.ishome }</td>
-	                    <td><img width="95%" alt="" src="${pageContext.request.contextPath }/${v.coursepic }"></td>
-	                    <td><img width="95%" alt="" src="${pageContext.request.contextPath }/${v.homepic }"></td>
+	                    <td><img width="95%" alt="" src="${v.coursepic }"></td>
+	                    <td><img width="95%" alt="" src="${v.homepic }"></td>
 	                    <td>
 	                        <a href="showCourseView.do?courseid=${v.courseid }"><img src="${pageContext.request.contextPath }/img/read.png" alt="查看" title="查看"/></a>
 	                        <a href="showCourseUpdate.do?courseid=${v.courseid }"><img src="${pageContext.request.contextPath }/img/xiugai.png" alt="修改" title="修改"/></a>

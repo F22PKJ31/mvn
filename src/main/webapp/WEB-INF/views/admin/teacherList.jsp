@@ -35,7 +35,7 @@
 	                    <td>${ts.count }</td>
 	                    <td>${t.teachername }</td>
 	                    <td>${t.teacherdesc }</td>
-	                    <td><img width="50%"  src="${pageContext.request.contextPath }/${t.teacherpic }"></td>
+	                    <td><img width="50%"  src="${t.teacherpic }"></td>
 	                    <td>
 	                        <!--<a href="showTeacherView.do"><img src="${pageContext.request.contextPath }/img/read.png" alt="查看" title="查看"/></a>-->
 	                        <a href="showTeacherUpdate.do?teacherid=${t.teacherid }"><img src="${pageContext.request.contextPath }/img/xiugai.png" alt="修改" title="修改"/></a>

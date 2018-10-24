@@ -15,7 +15,7 @@
 	
 	<context:component-scan base-package="com.sac.service" />
 	<context:component-scan base-package="com.sac.controller" />
-	
+
 
 	<!-- 配置视图解析器 -->
 	<bean
@@ -36,7 +36,8 @@
 			<bean class="com.sac.filter.AdminFilter" />
 		</mvc:interceptor>
 		<mvc:interceptor>
-			<mvc:mapping path="/mes/**" />
+			<mvc:mapping path="/**" />
+			<mvc:exclude-mapping path="/admin/**"/>
 			<bean class="com.sac.filter.LogFilter" />
 		</mvc:interceptor>
 	</mvc:interceptors>

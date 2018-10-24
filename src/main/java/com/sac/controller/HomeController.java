@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -114,7 +117,7 @@ public class HomeController extends BaseController {
 		}
 		if (!file.isEmpty()) {
 			try {
-				String filePath = UploadFile.URL + "img/student/" + file.getOriginalFilename();
+				String filePath = UploadFile.PATH + "img/student/" + file.getOriginalFilename();
 				file.transferTo(new File(filePath));
 				sacStudent.setStuheadpic("img/student/" + file.getOriginalFilename());
 			} catch (Exception e) {
@@ -138,13 +141,16 @@ public class HomeController extends BaseController {
 	}
 
 	@RequestMapping("login.do")
-	public @ResponseBody Map<String, Boolean> login(SacStudent sacStudent, HttpSession session) {
-		boolean flag = homeService.login(sacStudent);
+	public @ResponseBody Map<String, Boolean> login(SacStudent sacStudent, HttpSession session, HttpServletResponse response) {
+		boolean flag = homeService.login(sacStudent,session.getId());
 		if (flag) {
 			SacStudent student = homeService.selectStudent(sacStudent);
 			session.setAttribute("Login", student);
+			Cookie cookie = new Cookie("session",student.getStuid().toString());
+			cookie.setMaxAge(3600);
+			response.addCookie(cookie);
 		}
-		Map<String, Boolean> map = new HashMap<String, Boolean>();
+		Map<String, Boolean> map = new HashMap<>();
 		map.put("login", flag);
 		return map;
 
@@ -153,6 +159,11 @@ public class HomeController extends BaseController {
 	@RequestMapping("logout.do")
 	@ResponseBody
 	public void logout(HttpSession session) {
+		if (null != session.getAttribute("Login")){
+			SacStudent student = (SacStudent) session.getAttribute("Login");
+			homeService.clearSession(student.getStuid());
+		}
+
 		session.removeAttribute("Login");
 	}
 

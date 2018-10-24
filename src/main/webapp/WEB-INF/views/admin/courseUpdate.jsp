@@ -52,13 +52,13 @@
 			<div>
 				<label>图片</label> 
 				<input type="file" id="exampleInputFile" name="file" /> <br>
-				<img style="margin-left: 200px;margin-top: 10px; width: 283px;" alt="" src="${pageContext.request.contextPath }/${course.get(0).getCoursepic() }">
+				<img style="margin-left: 200px;margin-top: 10px; width: 283px;" alt="" src="${course.get(0).getCoursepic() }">
 				<span>*</span>
 			</div>
 			<div>
 				<label>首页图片</label> 
 				<input type="file" id="exampleInputFile" name="file2" /> <br>
-				<img style="margin-left: 200px;margin-top: 10px; width: 283px;" alt="" src="${pageContext.request.contextPath }/${course.get(0).getHomepic() }">
+				<img style="margin-left: 200px;margin-top: 10px; width: 283px;" alt="" src="${course.get(0).getHomepic() }">
 				<span>*</span>
 			</div>
 			<div>
